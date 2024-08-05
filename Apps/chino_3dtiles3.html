@@ -28,7 +28,10 @@
   <body>
     <div id="cesiumContainer"></div>
     <script>
-      var viewer = new Cesium.Viewer("cesiumContainer");
+      var viewer = new Cesium.Viewer("cesiumContainer", {
+          terrainProvider: Cesium.createWorldTerrain()
+      });
+
       var tileset1 = new Cesium.Cesium3DTileset({ url: './sample/chino/tileset.json'});
       tileset1.readyPromise.then(function(tileset1) {
         viewer.scene.primitives.add(tileset1);
