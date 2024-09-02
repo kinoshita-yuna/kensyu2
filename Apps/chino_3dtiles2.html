@@ -28,17 +28,18 @@
   <body>
     <div id="cesiumContainer"></div>
     <script>
-      var viewer = new Cesium.Viewer("cesiumContainer", {
-          terrainProvider: Cesium.createWorldTerrain(),
-          imageryProvider: new Cesium.OpenStreetMapImageryProvider({
+　　　(async function () {
+        try {
+          const viewer = new Cesium.Viewer("cesiumContainer", {
+            terrainProvider: await Cesium.createWorldTerrainAsync(),
+            baseLayer : new Cesium.ImageryLayer (new Cesium.OpenStreetMapImageryProvider({
               url : 'https://a.tile.openstreetmap.org/'
-          })
+          }))
       });
 
-      var tileset1 = new Cesium.Cesium3DTileset({ url: './sample/chino/tileset.json'});
-      tileset1.readyPromise.then(function(tileset1) {
+      const titleset = await Cesium.Cesium3DTileset.fromUrl('./sample/chino/tileset.json'});
         viewer.scene.primitives.add(tileset1);
-        tileset1.style = new Cesium.Cesium3DTileStyle({
+        tileset.style = new Cesium.Cesium3DTileStyle({
           color: 'rgb(0, 0, 255)',
           markerSymbol: '?'
         });
@@ -51,8 +52,9 @@
           }
         });
       }).otherwise(function(error) {
-        console.log(error);
-      });
+        console.log(Failed to load tileset: ${error}`);
+      }
+      })();
     </script>
   </body>
 </html>
