@@ -51,7 +51,7 @@
             roll : 0.0
           }
         });
-      }).otherwise(function(error) {
+      } catch (error) {
         console.log(Failed to load tileset: ${error}`);
       }
       })();
